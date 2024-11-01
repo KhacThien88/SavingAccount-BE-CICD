@@ -20,6 +20,6 @@ WORKDIR /app
 
 COPY --from=build /out .
 
-EXPOSE 81
+EXPOSE 3334
 
 ENTRYPOINT ["dotnet", "SavingAccount_BE.dll"]

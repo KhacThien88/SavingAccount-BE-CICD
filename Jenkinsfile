@@ -139,7 +139,7 @@ spec:
       - name: savingaccountbe
         image: ktei8htop15122004/savingaccount_be-sa-api:latest
         ports:
-        - containerPort: 81
+        - containerPort: 3334
         env:
         - name: ASPNETCORE_ENVIRONMENT
           value: "Development"
@@ -178,8 +178,8 @@ spec:
     app: be-app
   ports:
     - name: http
-      port: 81
-      targetPort: 81
+      port: 80
+      targetPort: 3334
       nodePort: 32101'''
     }
 }
