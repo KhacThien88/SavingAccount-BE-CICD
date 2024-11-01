@@ -134,13 +134,23 @@ spec:
     metadata:
       labels:
         app: be-app
+        app.kubernetes.io/name: be-app
     spec:
       containers:
       - name: savingaccountbe
         image: ktei8htop15122004/savingaccount_be-sa-api:latest
         ports:
         - containerPort: 3334
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+          limits:
+            cpu: 200m
+            memory: 200Mi
         env:
+        - name: ASPCORE_URLS
+          value: http://+:3334
         - name: ASPNETCORE_ENVIRONMENT
           value: "Development"
         - name: ConnectionStrings__UsersDatabase
@@ -178,6 +188,7 @@ spec:
     app: be-app
   ports:
     - name: http
+      protocol: TCP 
       port: 81
       targetPort: 3334
       nodePort: 32101'''
