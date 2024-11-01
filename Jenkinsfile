@@ -178,7 +178,7 @@ spec:
     app: be-app
   ports:
     - name: http
-      port: 80
+      port: 81
       targetPort: 3334
       nodePort: 32101'''
     }
