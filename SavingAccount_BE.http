@@ -1,0 +1,6 @@
+@SavingAccount_BE_HostAddress = http://localhost:5136
+
+GET {{SavingAccount_BE_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

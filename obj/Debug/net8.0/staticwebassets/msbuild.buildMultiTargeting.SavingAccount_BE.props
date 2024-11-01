@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\SavingAccount_BE.props" />
+</Project>
