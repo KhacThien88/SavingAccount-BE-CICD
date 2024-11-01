@@ -103,14 +103,12 @@ var app = builder.Build();
 
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-    using var serviceScope = app.Services.CreateScope();
-    using var dbContext = serviceScope.ServiceProvider.GetService<SavingAccountDbContext>();
-    dbContext?.Database.Migrate();
-}
+app.UseSwagger();
+app.UseSwaggerUI();
+using var serviceScope = app.Services.CreateScope();
+using var dbContext = serviceScope.ServiceProvider.GetService<SavingAccountDbContext>();
+dbContext?.Database.Migrate();
+
 await RoleSeeder.InitializeRoles(app.Services);
 await UserSeeder.InitializeUsers(app.Services);
 
