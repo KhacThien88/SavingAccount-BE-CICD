@@ -139,12 +139,12 @@ spec:
       - name: savingaccountbe
         image: ktei8htop15122004/savingaccount_be-sa-api:latest
         ports:
-        - containerPort: 80
+        - containerPort: 81
         env:
         - name: ASPNETCORE_ENVIRONMENT
           value: "Development"
         - name: ConnectionStrings__UsersDatabase
-          value: "Server=sqlserver;Database=User;User Id=sa;Password=1236fG543$;TrustServerCertificate=true"
+          value: "workstation id=SavingAccountDB.mssql.somee.com;packet size=4096;user id=KTeightop1512_SQLLogin_1;pwd=7n1cxj9rw9;data source=SavingAccountDB.mssql.somee.com;persist security info=False;initial catalog=SavingAccountDB;TrustServerCertificate=True"
 '''
   }
 }

@@ -19,8 +19,7 @@ FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
 
 COPY --from=build /out .
-COPY wait-for-it.sh /app
 
-RUN chmod +x /app/wait-for-it.sh
+EXPOSE 81
 
-ENTRYPOINT ["/app/wait-for-it.sh", "sqlserver:1433", "--", "dotnet", "SavingAccount_BE.dll"]
+ENTRYPOINT ["dotnet", "YourAppName.dll"]
