@@ -144,7 +144,7 @@ spec:
         - name: ASPNETCORE_ENVIRONMENT
           value: "Development"
         - name: ConnectionStrings__UsersDatabase
-          value: "Server=sqlservice.local;Database=User;User Id=sa;Password=1236fG543$;TrustServerCertificate=true"
+          value: "Server=sqlserver;Database=User;User Id=sa;Password=1236fG543$;TrustServerCertificate=true"
 '''
   }
 }
