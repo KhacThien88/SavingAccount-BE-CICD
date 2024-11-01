@@ -192,8 +192,6 @@ spec:
             sh "cp \$TMPKUBECONFIG ~/.kube/config"
             sh "ls -l \$TMPKUBECONFIG"
             sh "pwd"
-            sh "kubectl apply -f deployment-sql.yaml"
-            sh "kubectl apply -f service-sql.yaml"
             sh "kubectl apply -f deployment-be.yaml"
             sh "kubectl apply -f service-be.yaml"
           }
