@@ -22,4 +22,4 @@ COPY --from=build /out .
 
 EXPOSE 81
 
-ENTRYPOINT ["dotnet", "YourAppName.dll"]
+ENTRYPOINT ["dotnet", "SavingAccount_BE.dll"]
