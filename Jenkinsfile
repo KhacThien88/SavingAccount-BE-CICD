@@ -178,8 +178,8 @@ spec:
     app: be-app
   ports:
     - name: http
-      port: 80
-      targetPort: 80
+      port: 81
+      targetPort: 81
       nodePort: 32101'''
     }
 }
