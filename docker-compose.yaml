@@ -20,10 +20,10 @@ services:
       dockerfile: ./Dockerfile
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://+:80
-      - "DatabaseSettings:UsersDatabase=Server=mssql-service;Database=User;User Id=sa;Password=1236fG543$;TrustServerCertificate=true"
+      - ASPNETCORE_URLS=http://+:81
+      - "DatabaseSettings:UsersDatabase=Server=sqlserver;Database=User;User Id=sa;Password=1236fG543$;TrustServerCertificate=true"
     ports:
-      - "8080:80"
+      - "8080:81"
     depends_on:
       - sqlserver
     restart: always

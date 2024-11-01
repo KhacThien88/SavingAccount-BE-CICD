@@ -23,4 +23,4 @@ COPY wait-for-it.sh /app
 
 RUN chmod +x /app/wait-for-it.sh
 
-ENTRYPOINT ["/app/wait-for-it.sh", "mssql-service:1433", "--", "dotnet", "SavingAccount_BE.dll"]
+ENTRYPOINT ["/app/wait-for-it.sh", "sqlserver:1433", "--", "dotnet", "SavingAccount_BE.dll"]
