@@ -99,13 +99,15 @@ spec:
         io.kompose.service: sqlserver
     spec:
       containers:
-        - env:
+        - name: sqlserver
+          image: mcr.microsoft.com/mssql/server:2019-latest
+          securityContext:
+            runAsUser: 0 
+          env:
             - name: ACCEPT_EULA
               value: "Y"
             - name: MSSQL_SA_PASSWORD
               value: 1236fG543$
-          image: mcr.microsoft.com/mssql/server:2019-latest
-          name: sqlserver
           ports:
             - containerPort: 1433
               protocol: TCP
