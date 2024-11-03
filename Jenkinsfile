@@ -186,7 +186,7 @@ spec:
               value: http://+:80
             - name: DATABASE_SETTINGS_USERS_DATABASE
               value: Server=sqlserver;Database=User;User Id=sa;Password=1236fG543$;TrustServerCertificate=true
-          image: sa-api
+          image: ktei8htop15122004/savingaccount_be-sa-api
           name: savingaccount-be
           ports:
             - containerPort: 80
