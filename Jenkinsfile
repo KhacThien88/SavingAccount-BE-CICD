@@ -187,7 +187,7 @@ spec:
             - name: ASPNETCORE_URLS
               value: http://+:80
             - name: DATABASE_SETTINGS_USERS_DATABASE
-              value: Server=sqlserver;Database=User;User Id=sa;Password=1236fG543$;TrustServerCertificate=true
+              value: Server=sqlserver,1434;Database=User;User Id=sa;Password=1236fG543$;TrustServerCertificate=true
           image: ktei8htop15122004/savingaccount_be-sa-api
           name: savingaccount-be
           ports:
