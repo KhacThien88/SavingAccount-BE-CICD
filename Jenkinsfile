@@ -209,10 +209,12 @@ metadata:
     io.kompose.service: sa-api
   name: sa-api
 spec:
+  type: NodePort
   ports:
-    - name: "8080"
-      port: 8080
+    - name: "be-app"
+      port: 7423
       targetPort: 80
+      nodePort: 32101
   selector:
     io.kompose.service: sa-api
 '''
