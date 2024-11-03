@@ -1,0 +1,34 @@
+version: "3.8"
+
+services:
+  sqlserver:
+    container_name: sqlserver
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+      MSSQL_SA_PASSWORD: "1236fG543$"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1434:1433"
+    volumes:
+      - sql_data:/var/opt/mssql
+    restart: always
+
+  sa-api:
+    container_name: SavingAccount-BE
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+      - "DatabaseSettings:UsersDatabase=Server=sqlserver;Database=User;User Id=sa;Password=1236fG543$;TrustServerCertificate=true"
+    ports:
+      - "8080:80"
+    depends_on:
+      - sqlserver
+    restart: always
+    command: ["dotnet", "ef", "database update"]
+
+volumes:
+  sql_data:
+    name: sql_data
