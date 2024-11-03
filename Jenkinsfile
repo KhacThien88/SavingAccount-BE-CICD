@@ -98,9 +98,6 @@ spec:
     type: Recreate
   template:
     metadata:
-      annotations:
-        kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert
-        kompose.version: 1.34.0 (cbf2835db)
       labels:
         io.kompose.service: sqlserver
     spec:
@@ -147,9 +144,6 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  annotations:
-    kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert
-    kompose.version: 1.34.0 (cbf2835db)
   labels:
     io.kompose.service: sqlserver
   name: sqlserver
@@ -183,9 +177,6 @@ spec:
       io.kompose.service: sa-api
   template:
     metadata:
-      annotations:
-        kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert
-        kompose.version: 1.34.0 (cbf2835db)
       labels:
         io.kompose.service: sa-api
     spec:
@@ -217,9 +208,6 @@ spec:
 ---
 kind: Service
 metadata:
-  annotations:
-    kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert
-    kompose.version: 1.34.0 (cbf2835db)
   labels:
     io.kompose.service: sa-api
   name: sa-api
