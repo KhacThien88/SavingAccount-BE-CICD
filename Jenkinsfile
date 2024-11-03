@@ -149,7 +149,7 @@ metadata:
 spec:
   ports:
     - name: "sqlserver"
-      port: 1434
+      port: 1433
       targetPort: 1433
   selector:
     io.kompose.service: sqlserver
