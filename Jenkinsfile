@@ -184,7 +184,7 @@ spec:
               value: Development
             - name: ASPNETCORE_URLS
               value: http://+:80
-            - name: DatabaseSettings:UsersDatabase
+            - name: DATABASE_SETTINGS_USERS_DATABASE
               value: Server=sqlserver;Database=User;User Id=sa;Password=1236fG543$;TrustServerCertificate=true
           image: sa-api
           name: savingaccount-be
@@ -200,6 +200,7 @@ spec:
               cpu: "250m"
       restartPolicy: Always
 ---
+apiVersion: v1
 kind: Service
 metadata:
   labels:
