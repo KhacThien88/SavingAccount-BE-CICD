@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\SavingAccountBEMain\\SavingAccount_BE_trigger\\SavingAccount_BE.csproj": {}
+    "D:\\SavingAccountBECon\\SavingAccount-BE-CICD\\SavingAccount_BE.csproj": {}
   },
   "projects": {
-    "D:\\SavingAccountBEMain\\SavingAccount_BE_trigger\\SavingAccount_BE.csproj": {
+    "D:\\SavingAccountBECon\\SavingAccount-BE-CICD\\SavingAccount_BE.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\SavingAccountBEMain\\SavingAccount_BE_trigger\\SavingAccount_BE.csproj",
+        "projectUniqueName": "D:\\SavingAccountBECon\\SavingAccount-BE-CICD\\SavingAccount_BE.csproj",
         "projectName": "SavingAccount_BE",
-        "projectPath": "D:\\SavingAccountBEMain\\SavingAccount_BE_trigger\\SavingAccount_BE.csproj",
+        "projectPath": "D:\\SavingAccountBECon\\SavingAccount-BE-CICD\\SavingAccount_BE.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "D:\\SavingAccountBEMain\\SavingAccount_BE_trigger\\obj\\",
+        "outputPath": "D:\\SavingAccountBECon\\SavingAccount-BE-CICD\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

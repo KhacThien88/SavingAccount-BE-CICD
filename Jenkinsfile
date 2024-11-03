@@ -78,122 +78,162 @@ pipeline {
         }
       }
     }
-//     stage('Create SQL Deployment YAML') {
-//   steps {
-//     writeFile file: '/home/jenkins/agent/workspace/SavingAccountBE_main/deployment-sql.yaml', text: '''apiVersion: apps/v1
-// kind: Deployment
-// metadata:
-//   name: sqlserver
-//   labels:
-//     app: sqlserver
-// spec:
-//   replicas: 1
-//   selector:
-//     matchLabels:
-//       app: sqlserver
-//   template:
-//     metadata:
-//       labels:
-//         app: sqlserver
-//     spec:
-//       containers:
-//       - name: sqlserver
-//         image: mcr.microsoft.com/mssql/server:2019-latest
-//         ports:
-//         - containerPort: 1433
-//         env:
-//         - name: MSSQL_SA_PASSWORD
-//           value: "1236fG543$"
-//         - name: ACCEPT_EULA
-//           value: "Y"
-//         volumeMounts:
-//         - name: sql-data
-//           mountPath: /var/opt/mssql
-//       volumes:
-//       - name: sql-data
-//         persistentVolumeClaim:
-//           claimName: sql-data-pvc
-// '''
-//   }
-// }
-
-    stage('Create Deployment YAML for BE') {
+    stage('Create SQL Deployment , PVC and Service YAML') {
   steps {
-    writeFile file: '/home/jenkins/agent/workspace/SavingAccountBE_main/deployment-be.yaml', text: '''apiVersion: apps/v1
+    writeFile file: '/home/jenkins/agent/workspace/SavingAccountBE_main/deployment-sql.yaml', text: '''apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: be-app-deployment
+  annotations:
+    kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert
+    kompose.version: 1.34.0 (cbf2835db)
   labels:
-    app: be-app
+    io.kompose.service: sqlserver
+  name: sqlserver
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      app: be-app
+      io.kompose.service: sqlserver
+  strategy:
+    type: Recreate
   template:
     metadata:
+      annotations:
+        kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert
+        kompose.version: 1.34.0 (cbf2835db)
       labels:
-        app: be-app
-        app.kubernetes.io/name: be-app
+        io.kompose.service: sqlserver
     spec:
       containers:
-      - name: savingaccountbe
-        image: ktei8htop15122004/savingaccount_be-sa-api:latest
-        ports:
-        - containerPort: 3334
-        resources:
-          requests:
-            cpu: 100m
-            memory: 100Mi
-          limits:
-            cpu: 200m
-            memory: 200Mi
-        env:
-        - name: ASPCORE_URLS
-          value: http://+:3334
-        - name: ASPNETCORE_ENVIRONMENT
-          value: "Development"
-        - name: ConnectionStrings__UsersDatabase
-          value: "workstation id=SavingAccountDB.mssql.somee.com;packet size=4096;user id=KTeightop1512_SQLLogin_1;pwd=7n1cxj9rw9;data source=SavingAccountDB.mssql.somee.com;persist security info=False;initial catalog=SavingAccountDB;TrustServerCertificate=True"
+        - env:
+            - name: ACCEPT_EULA
+              value: "Y"
+            - name: MSSQL_SA_PASSWORD
+              value: 1236fG543$
+          image: mcr.microsoft.com/mssql/server:2019-latest
+          name: sqlserver
+          ports:
+            - containerPort: 1433
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /var/opt/mssql
+              name: sql-data
+          resources:
+            limits:
+              memory: "5Gi"
+              cpu: "1"
+            requests:
+              memory: "4Gi"
+              cpu: "1"
+      restartPolicy: Always
+      volumes:
+        - name: sql-data
+          persistentVolumeClaim:
+            claimName: sql-data
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    io.kompose.service: sql-data
+  name: sql-data
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert
+    kompose.version: 1.34.0 (cbf2835db)
+  labels:
+    io.kompose.service: sqlserver
+  name: sqlserver
+spec:
+  ports:
+    - name: "sqlserver"
+      port: 1434
+      targetPort: 1433
+  selector:
+    io.kompose.service: sqlserver
+
 '''
   }
 }
 
-// stage('Create SQL Service YAML') {
-//   steps {
-//     writeFile file: '/home/jenkins/agent/workspace/SavingAccountBE_main/service-sql.yaml', text: '''apiVersion: v1
-// kind: Service
-// metadata:
-//   name: sqlserver-svc
-// spec:
-//   selector:
-//     app: sqlserver
-//   ports:
-//     - protocol: TCP
-//       port: 1433
-//       targetPort: 1433
-// '''
-//   }
-// }
-
-    stage('Create Service YAML') {
-    steps {
-        writeFile file: '/home/jenkins/agent/workspace/SavingAccountBE_main/service-be.yaml', text: '''apiVersion: v1
+    stage('Create Deployment and Service YAML for BE') {
+  steps {
+    writeFile file: '/home/jenkins/agent/workspace/SavingAccountBE_main/deployment-be.yaml', text: '''apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert
+    kompose.version: 1.34.0 (cbf2835db)
+  labels:
+    io.kompose.service: sa-api
+  name: sa-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: sa-api
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert
+        kompose.version: 1.34.0 (cbf2835db)
+      labels:
+        io.kompose.service: sa-api
+    spec:
+      containers:
+        - args:
+            - dotnet
+            - ef
+            - database update
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: Development
+            - name: ASPNETCORE_URLS
+              value: http://+:80
+            - name: DatabaseSettings:UsersDatabase
+              value: Server=sqlserver;Database=User;User Id=sa;Password=1236fG543$;TrustServerCertificate=true
+          image: sa-api
+          name: savingaccount-be
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+      restartPolicy: Always
+---
 kind: Service
 metadata:
-  name: be-app-svc
+  annotations:
+    kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert
+    kompose.version: 1.34.0 (cbf2835db)
+  labels:
+    io.kompose.service: sa-api
+  name: sa-api
 spec:
-  type: NodePort
-  selector:
-    app: be-app
   ports:
-    - name: http
-      protocol: TCP 
-      port: 81
-      targetPort: 3334
-      nodePort: 32101'''
-    }
+    - name: "8080"
+      port: 8080
+      targetPort: 80
+  selector:
+    io.kompose.service: sa-api
+'''
+  }
 }
+
 
     stage('Deploying App to Kubernetes') {
       steps {
@@ -203,8 +243,8 @@ spec:
             sh "cp \$TMPKUBECONFIG ~/.kube/config"
             sh "ls -l \$TMPKUBECONFIG"
             sh "pwd"
+            sh "kubectl apply -f deployment-sql.yaml"
             sh "kubectl apply -f deployment-be.yaml"
-            sh "kubectl apply -f service-be.yaml"
           }
         }
       }

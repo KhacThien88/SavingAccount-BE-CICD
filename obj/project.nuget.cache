@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "mVjJT9HvObY=",
+  "dgSpecHash": "i5KABHVE/yA=",
   "success": true,
-  "projectFilePath": "D:\\SavingAccountBEMain\\SavingAccount_BE_trigger\\SavingAccount_BE.csproj",
+  "projectFilePath": "D:\\SavingAccountBECon\\SavingAccount-BE-CICD\\SavingAccount_BE.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",
